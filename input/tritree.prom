@@ -1,0 +1,36 @@
+/* A ternary tree of depth max, with accepting states at depth accept */
+
+byte accept = 7; /* smaller or equal to max */
+byte max = 10; /* smaller or equal to 30 */
+
+init {
+	byte d = 0; /* depth */
+	int c1 = 0;
+	int c2 = 0;
+
+	do
+	:: d < accept ->
+		if
+		:: c1 = c1 + (1 << d); d++
+		:: c2 = c2 + (1 << d); d++
+		:: d++
+		fi
+	:: else -> break
+	od
+
+	accept: skip;
+
+	do
+	:: d < max ->
+		if
+		:: c1 = c1 + (1 << d); d++
+		:: c2 = c2 + (1 << d); d++
+		:: d++
+		fi
+	:: else -> break
+	od
+
+	if
+	:: false
+	fi
+}
